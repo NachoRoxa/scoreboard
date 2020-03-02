@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Header from './Header';
 import Player from './Player';
+import AddPlayerForm from './AddPlayerForm';
 
 class App extends Component{
   constructor(){
@@ -47,12 +48,32 @@ class App extends Component{
     }));
   }
 
+  // prevPlayerID = 4;
+
+  handleAddPlayer = (name) => {
+
+    this.setState(prevState => {
+      const playerNum = prevState.players.length.toString();
+      console.log(playerNum);
+      return {
+        players: [
+          ...prevState.players,
+          {
+            name: name,
+            score: 0,
+            id: this.playerNum += 1
+          }
+        ]
+      }
+    });
+  }
+
   render() {
     return (
       <div className='scoreboard'>
         <Header
           title='Scoreboard'
-          totalPlayers={this.state.players.length}
+          players={this.state.players}
         />
         {/* Players List */}
         {this.state.players.map((player, index) =>
@@ -66,6 +87,10 @@ class App extends Component{
             removePlayer={this.handleRemovePlayer}
           />
         )}
+
+        <AddPlayerForm 
+          addPlayer = {this.handleAddPlayer}
+        />
       </div>
     );
   }
