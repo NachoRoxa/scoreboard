@@ -57,9 +57,7 @@ class App extends Component{
       score: prevState.players[index].score += delta
     }));
   }
-
-  // prevPlayerID = 4;
-
+  
   handleAddPlayer = (name) => {
 
     this.setState(prevState => {
